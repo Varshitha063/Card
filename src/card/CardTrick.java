@@ -1,12 +1,10 @@
 package card;
 
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * A class that fills a magic hand of 7 cards with random Card Objects
- * and then asks the user to pick a card and searches the array of cards
- * for the match to the user's card.
+ * and then searches the array of cards for a hard-coded lucky card.
  * 
  * Modified by: Varshitha Umamaheswaran
  * Student Number: 991814357
@@ -31,47 +29,36 @@ public class CardTrick {
 
             magicHand[i] = c;
 
-            // Print each card in the magic hand
+            // Print each card
             System.out.println(c.getSuit() + " " + c.getValue());
         }
 
-        // STEP 3: Ask user to pick a card
-        Scanner input = new Scanner(System.in);
+        // STEP 3: Create hard-coded lucky card
+        Card luckyCard = new Card();
+        luckyCard.setValue(2);
+        luckyCard.setSuit("Clubs");
 
-        System.out.print("Enter a card value (1-13): ");
-        int userValue = input.nextInt();
-
-        System.out.print("Enter a suit (0=Hearts, 1=Diamonds, 2=Clubs, 3=Spades): ");
-        int suitIndex = input.nextInt();
-
-        Card userCard = new Card();
-        userCard.setValue(userValue);
-        userCard.setSuit(Card.SUITS[suitIndex]);
-
-        // STEP 4: Search for the user's card
+        // STEP 4: Search for the lucky card
         boolean found = false;
 
         for (int i = 0; i < magicHand.length; i++)
         {
-            if (magicHand[i].getValue() == userCard.getValue() &&
-                magicHand[i].getSuit().equals(userCard.getSuit()))
+            if (magicHand[i].getValue() == luckyCard.getValue() &&
+                magicHand[i].getSuit().equals(luckyCard.getSuit()))
             {
                 found = true;
                 break;
             }
         }
 
-        
+        // STEP 5: Report result
         if (found)
         {
-            System.out.println("Your card is in the magic hand!");
+            System.out.println("Congratulations! The lucky card is in the magic hand!");
         }
         else
         {
-            System.out.println("Sorry, Your card is NOT in the magic hand.");
+            System.out.println("Sorry! The lucky card is not in the magic hand.");
         }
-
-        input.close();
     }
 }
-
